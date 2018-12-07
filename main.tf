@@ -69,7 +69,7 @@ resource "aws_route_table" "private" {
   }
 }
 
-# Explicitely associate the newly created route tables to the private subnets (so they don't default to the main route table)
+# Explicitly associate the newly created route tables to the private subnets (so they don't default to the main route table)
 resource "aws_route_table_association" "private" {
   count          = "${var.az_count}"
   subnet_id      = "${element(aws_subnet.private.*.id, count.index)}"
@@ -124,13 +124,13 @@ resource "aws_security_group" "ecs_tasks" {
 ### ALB
 
 resource "aws_alb" "main" {
-  name            = "tf-ecs-chat"
+  name            = "tf-ecs-flogo-web-ui"
   subnets         = ["${aws_subnet.public.*.id}"]
   security_groups = ["${aws_security_group.lb.id}"]
 }
 
 resource "aws_alb_target_group" "app" {
-  name        = "tf-ecs-chat"
+  name        = "tf-ecs-flogo-web-ui"
   port        = 80
   protocol    = "HTTP"
   vpc_id      = "${aws_vpc.main.id}"
@@ -167,6 +167,9 @@ resource "aws_ecs_task_definition" "app" {
   {
     "cpu": ${var.fargate_cpu},
     "image": "${var.app_image}",
+    "command": [
+      "${var.app_command}"
+    ],
     "memory": ${var.fargate_memory},
     "name": "app",
     "networkMode": "awsvpc",
