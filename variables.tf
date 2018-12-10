@@ -11,6 +11,11 @@ variable "aws_secret_key" {
   description = "AWS secret key"
 }
 
+variable "aws_security_token" {
+  description = "AWS security token"
+  default     = ""
+}
+
 variable "az_count" {
   description = "Number of AZs to cover in a given AWS region"
   default     = "2"

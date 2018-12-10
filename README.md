@@ -24,6 +24,9 @@ cd terraform-fargate-flogo-web-ui
 ```
 echo 'aws_access_key = "<YOUR_AWS_ACCESS_KEY>"' > terraform.tfvars
 echo 'aws_secret_key = "<YOUR_AWS_SECRET_KEY>"' >> terraform.tfvars
+
+# optionally, if using a security token
+echo 'aws_security_token = "<YOUR_AWS_SECURITY_TOKEN>"' >> terraform.tfvars
 ```
 
 3. launch Terraform
