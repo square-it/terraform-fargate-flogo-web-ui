@@ -7,3 +7,6 @@
 
 # Variables file
 terraform.tfvars
+
+# Backend config
+backend.tf
