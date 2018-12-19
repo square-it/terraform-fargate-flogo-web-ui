@@ -29,7 +29,7 @@ module "alb_service_task" {
   namespace                 = "${var.namespace}"
   stage                     = "${var.stage}"
 
-  name                      = "instance1-1"
+  name                      = "instance1-task"
 
   container_definition_json = "${module.container_definition.json}"
   container_name            = "flogo-web-ui-app"
@@ -39,6 +39,6 @@ module "alb_service_task" {
   vpc_id                    = "${var.vpc_id}"
   private_subnet_ids        = "${var.private_subnet_ids}"
 
-  alb_target_group_arn      = "${module.alb.alb_arn}"
+  alb_target_group_arn      = "${module.alb.default_target_group_arn}"
   security_group_ids        = ["${module.alb.security_group_id}"]
 }
